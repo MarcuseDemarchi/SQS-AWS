@@ -1,0 +1,20 @@
+name: Teste - Consumer
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build dockerfile - Consumer
+        run: |
+          cd consumer/
+          docker build -t teste-consumer:latest .
