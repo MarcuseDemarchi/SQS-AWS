@@ -1,0 +1,26 @@
+
+version: "3.9"
+ 
+services:
+ 
+  producer:
+    build:
+      context: ./producer
+    container_name: sqs-producer
+    env_file:
+      - .env
+    environment:
+      INTERVALO_SEGUNDOS: "5"
+    restart: unless-stopped
+ 
+  consumer:
+    build:
+      context: ./consumer
+    container_name: sqs-consumer
+    env_file:
+      - .env
+    environment:
+      MAX_MENSAGENS: "5"
+      WAIT_TIME_SECONDS: "10"
+    restart: unless-stopped
+ 
